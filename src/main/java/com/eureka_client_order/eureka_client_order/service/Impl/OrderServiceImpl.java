@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO create(OrderDTO oDTO) {
-        List<String> productIdList = oDTO.getOrderDetailList().stream().map(OrderDetail::getDetailId).collect(Collectors.toList());
+        List<String> productIdList = oDTO.getOrderDetailList().stream().map(OrderDetail::getProductId).collect(Collectors.toList());
         List<ProductInfo> productInfoList = productClient.listForOrder(productIdList);
         log.info("productInfoList:"+productInfoList.get(0).getProductName());
         BigDecimal orderAmt = new BigDecimal(BigInteger.ZERO);

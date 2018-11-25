@@ -1,0 +1,41 @@
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+spring:
+  application:
+    name: order    #should be same as git config center  order-dev.yml
+  rabbitmq:
+    host: 159.203.21.59
+    port: 5672
+    username: guest
+    password:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    username: root
+#    password: 123
+#    url: jdbc:mysql://127.0.0.1/jpa_new?serverTimezone=UTC&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#  jpa:
+#    show-sql: true
+  cloud:
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+    config:
+      discovery:
+        enabled: true  #change to true if using config center
+        service-id: CONFIG
+      profile: dev
+      fail-fast: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+server:
+  port: 8082
+debug: true
+logging:
+  path: F:\workspace\eureka_client_order
+#change name from application.yml to bootstrap.yml (startup before application.xml)

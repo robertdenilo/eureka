@@ -16,5 +16,4 @@ import org.springframework.stereotype.Component;
 public class PersonConfig {
     private String name;
     private Integer age;
-
 }

@@ -1,7 +1,13 @@
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka
+# commment for config center
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+env: dev
+person:
+  name: xiaomingpppp
+  age: 88
+#
 spring:
   application:
     name: order    #should be same as git config center  order-dev.yml
@@ -9,30 +15,38 @@ spring:
     host: 159.203.21.59
     port: 5672
     username: guest
-    password:
-#  datasource:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    username: root
-#    password: 123
-#    url: jdbc:mysql://127.0.0.1/jpa_new?serverTimezone=UTC&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false
-#  jpa:
-#    show-sql: true
+    password: guest
+#  commment for config center
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123
+    url: jdbc:mysql://127.0.0.1/jpa_new?serverTimezone=UTC&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false
+  jpa:
+    show-sql: true
   cloud:
-    bus:
-      enabled: true
-      trace:
-        enabled: true
-    config:
-      discovery:
-        enabled: true  #change to true if using config center
-        service-id: CONFIG
-      profile: dev
-      fail-fast: true
-management:
-  endpoints:
-    web:
-      exposure:
-        include: bus-refresh
+    stream:
+      bindings:
+        MyMessageOut:
+          group: abc    # only one instance recv stream msg from group
+          content-type: application/json   #payload use json instead of base64
+#
+#  cloud:
+#    bus:
+#      enabled: true
+#      trace:
+#        enabled: true
+#    config:
+#      discovery:
+#        enabled: true  #change to true if using config center
+#        service-id: CONFIG
+#      profile: dev
+#      #fail-fast: true
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: bus-refresh
 server:
   port: 8082
 debug: true

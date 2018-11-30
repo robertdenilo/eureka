@@ -1,6 +1,8 @@
 package com.eureka_client_order.eureka_client_order.controller;
 
 import com.eureka_client_order.eureka_client_order.message.StreamClient;
+import com.eureka_client_order.eureka_client_order.utils.JsonUtil;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,8 @@ import java.util.Date;
 public class SendMessageController {
     @Autowired
     private StreamClient streamClient;
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
     @GetMapping("sendMsg")
     public void processSend() {
@@ -25,5 +29,8 @@ public class SendMessageController {
     public void processTransform() {
         streamClient.output().send(MessageBuilder.withPayload("sendMsg now :" + new Date()).build());
     }
-
+    @GetMapping("sendRmq")
+    public void sendRabbitmq(){
+        amqpTemplate.convertAndSend("myqueue3", "hello rabbit mq");
+    }
 }

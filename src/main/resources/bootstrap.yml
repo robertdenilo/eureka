@@ -12,7 +12,7 @@ spring:
   application:
     name: order    #should be same as git config center  order-dev.yml
   rabbitmq:
-    host: 159.203.21.59
+    host: 142.93.146.174
     port: 5672
     username: guest
     password: guest
@@ -30,6 +30,9 @@ spring:
         MyMessageOut:
           group: abc    # only one instance recv stream msg from group
           content-type: application/json   #payload use json instead of base64
+  redis:
+    host: 142.93.146.174
+    port: 6379
 #
 #  cloud:
 #    bus:

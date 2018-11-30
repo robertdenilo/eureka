@@ -35,7 +35,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("/create")
+    @PostMapping("/create")      //postman x-www-form-urlencoded:  name, phone, address, openId, item:[{productId:"1",productQuantity:2},{productId:"2",productQuantity:3}]
+    //reply: msg:successful and data.orderid
     public ResultVO<Map<String,String>> create(@Valid OrderForm orderForm, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             log.error("Create Order: param not correct, order form={}",orderForm);

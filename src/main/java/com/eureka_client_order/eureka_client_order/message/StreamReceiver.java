@@ -3,6 +3,7 @@ package com.eureka_client_order.eureka_client_order.message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.integration.annotation.Transformer;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
@@ -25,4 +26,9 @@ public class StreamReceiver {
     public void processReturn(String msg){
         log.info("StreamReceiver From Return:"+msg);
     }
+    @Transformer(inputChannel = StreamClient.INPUT,outputChannel = StreamClient.OUTPUT)
+    public String transformProcessor(String msg){
+        return msg+"GOOD";
+    }
+
 }
